@@ -20,14 +20,17 @@ app.post("/api/regra3", (req, res) => {
 });
 
 
-// Rota para o conversor de tempo
-//app.post("/api/conversor-tempo", (req, res) => {
- // const { valor, unidadeOrigem, unidadeDestino } = req.body;
- // res.json({ resultado: "Funcionalidade em desenvolvimento" });
-//})
-
+// Rota para remover caracteres especiais
+app.post("/api/removeChars", (req, res) => {
+  const { text } = req.body;
+  if (!text) return res.status(400).json({ erro: "Texto obrigatório." });
+  
+  const cleanedText = text.replace(/[^a-zA-Z0-9À-ÿ\s]/g, "");
+  res.json({ resultado: cleanedText});
+ 
+});
 
 const PORT = 5000;
 app.listen(PORT, () => {
-  console.log(`✅ Servidor rodando em http://localhost:${PORT}`);
+  console.log(` Servidor rodando em http://localhost:${PORT}`);
 });
